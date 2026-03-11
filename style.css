@@ -1,0 +1,46 @@
+:root{
+    --color-dark: rgb(14, 14, 14);
+    --color-dark2: rgb(32, 32, 32);
+    --color-dark3: rgb(22, 22, 22);
+    --color-white: #fff;
+    --color-blue: rgb(41, 190, 213);
+    --color-blue2: rgb(24, 184, 209);
+    --color-purple: rgb(104, 24, 209);
+    --color-purple2: rgb(92, 16, 191);
+}
+
+body{
+    font-family:"Lato";
+    background-color: var(--color-dark) ;
+    color: var(--color-blue2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.content--add-item{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+#input-new-task, 
+#btn-new-task{
+    border: none;
+    font-size: 1rem;
+    outline: none;
+    padding: 1rem;
+}
+
+.content--body{
+
+}
+

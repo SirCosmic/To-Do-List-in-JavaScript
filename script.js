@@ -4,47 +4,50 @@ const localStorageKey = "to-do-list"
 function validateNewTask () 
 {
     let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
+
     let inputValue = document.getElementById('input-new-task').value
+
     let exists  = values.find(x => x.name == inputValue)
+
     return !exists ? false : true;
 }
 
 // Insert new tasks
 function newTask () 
 {
-    let input = document.getElementById('input-new-task')
+    let input = document.getElementById('input-new-task') // Pega o valor do input e armazena na variável input
     input.style.border = ''
 
-    // validation
+    // Validação para verificar se o input está vazio ou se a tarefa já existe
     if(!input.value)
     {
         input.style.border = '2px solid red'
         alert("You must put something in the task");
     }
-    else if(validateNewTask())
+    else if(validateNewTask()) // Verifica se a tarefa já existe
     {
         alert('This task already exists')
     }
-    else 
+    else // Se a tarefa for válida, ela é adicionada à lista
     {
-        // increment to localstorage
-        let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
-        values.push({
+        // O código a seguir é responsável por adicionar a nova tarefa ao localStorage e atualizar a lista de tarefas exibida na tela
+        let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]") // pega o valor do localStorage e armazena na variável values, se o localStorage estiver vazio, ele cria um array vazio
+        values.push({ // Adiciona a nova tarefa ao array values
             name: input.value
         });
-        localStorage.setItem(localStorageKey,JSON.stringify(values))
+        localStorage.setItem(localStorageKey,JSON.stringify(values)) // Armazena o array values no localStorage, convertendo-o para uma string JSON
         showValues()
     }
 
     input.value = ''
 }
 
-function showValues()
+function showValues() // Exibe as tarefas armazenadas no localStorage na tela
 {
-    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]");
-    let list = document.getElementById('to-do-list');
+    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]"); // pega o valor do localStorage e armazena na variável values, se o localStorage estiver vazio, ele cria um array vazio
+    let list = document.getElementById('to-do-list'); 
     list.innerHTML = ''
-    for (let i = 0; i < values.length; i++)
+    for (let i = 0; i < values.length; i++) // Loop para percorrer o array values e exibir cada tarefa na tela
     {
         list.innerHTML += `<li>
             ${values[i]['name']}
@@ -52,9 +55,9 @@ function showValues()
         </li>`
     }
 }
-function removeItem (data) 
+function removeItem (data) // Remove a tarefa do localStorage e atualiza a lista de tarefas exibida na tela
 {
-    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
+    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]") // pega o valor do localStorage e armazena na variável values, se o localStorage estiver vazio, ele cria um array vazio
     let index = values.findIndex(x => x.name == data)
     values.splice(index,1)
     localStorage.setItem(localStorageKey,JSON.stringify(values))

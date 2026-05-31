@@ -51,7 +51,7 @@ function showValues() // Exibe as tarefas armazenadas no localStorage na tela
     {
         list.innerHTML += `<li>
             ${values[i]['name']}
-        <button id='btn-ok' onclick="removeItem(${values[i]['name']})">ok</button>
+        <button id='btn-ok' onclick="removeItem('${values[i]['name']}')">ok</button>
         </li>`
     }
 }

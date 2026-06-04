@@ -1,4 +1,5 @@
 const localStorageKey = "to-do-list"
+let input;
 
 // Verify if the task already exists
 function validateNewTask () 
@@ -15,7 +16,7 @@ function validateNewTask ()
 // Insert new tasks
 function newTask () 
 {
-    let input = document.getElementById('input-new-task') // Pega o valor do input e armazena na variável input
+    input = document.getElementById('input-new-task') // Pega o valor do input e armazena na variável input
     input.style.border = ''
 
     // Validação para verificar se o input está vazio ou se a tarefa já existe
@@ -38,7 +39,7 @@ function newTask ()
         localStorage.setItem(localStorageKey,JSON.stringify(values)) // Armazena o array values no localStorage, convertendo-o para uma string JSON
         showValues()
     }
-
+    console.log(input.value);
     input.value = ''
 }
 

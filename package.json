@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/SirCosmic/To-Do-List-in-JavaScript#readme",
   "dependencies": {
+    "express": "^5.2.1",
     "mongoose": "^9.6.3"
   }
 }

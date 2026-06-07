@@ -31,6 +31,19 @@ function newTask ()
     }
     else // Se a tarefa for válida, ela é adicionada à lista
     {
+
+        let dadosTarefa = {
+            name: input.value
+        };
+
+        fetch("http://localhost:3000/tarefas", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dadosTarefa)
+        })
+        
         // O código a seguir é responsável por adicionar a nova tarefa ao localStorage e atualizar a lista de tarefas exibida na tela
         let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]") // pega o valor do localStorage e armazena na variável values, se o localStorage estiver vazio, ele cria um array vazio
         values.push({ // Adiciona a nova tarefa ao array values

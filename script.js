@@ -18,6 +18,11 @@ function newTask ()
 {
     input = document.getElementById('input-new-task') // Pega o valor do input e armazena na variável input
     input.style.border = ''
+    const data = new Date(); // Cria um objeto Date para obter a data atual
+    const opcoes = {
+        dateStyle: 'short',
+        timeStyle: 'short'
+    };
 
     // Validação para verificar se o input está vazio ou se a tarefa já existe
     if(!input.value)
@@ -33,7 +38,8 @@ function newTask ()
     {
 
         let dadosTarefa = { // Cria um objeto com os dados da nova tarefa
-            name: input.value
+            name: input.value,
+            date: data.toLocaleString('pt-BR', opcoes)
         };
 
         fetch("http://localhost:3000/tarefas", { // Envia uma requisição POST para o servidor para adicionar a nova tarefa
@@ -47,7 +53,8 @@ function newTask ()
         // O código a seguir é responsável por adicionar a nova tarefa ao localStorage e atualizar a lista de tarefas exibida na tela
         let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]") // pega o valor do localStorage e armazena na variável values, se o localStorage estiver vazio, ele cria um array vazio
         values.push({ // Adiciona a nova tarefa ao array values
-            name: input.value
+            name: input.value,
+            date: data.toLocaleString('pt-BR', opcoes)
         });
         localStorage.setItem(localStorageKey,JSON.stringify(values)) // Armazena o array values no localStorage, convertendo-o para uma string JSON
         showValues()

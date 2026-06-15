@@ -1,7 +1,7 @@
 const localStorageKey = "to-do-list"
 let input;
 
-// Verify if the task already exists
+// Verifica se a tarefa já existe no localStorage, retornando true ou false
 function validateNewTask () 
 {
     let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
@@ -13,7 +13,7 @@ function validateNewTask ()
     return !exists ? false : true;
 }
 
-// Insert new tasks
+// Adiciona novas tarefas a lista de tarefas, verificando se o input é válido e se a tarefa já existe, e atualiza a lista de tarefas exibida na tela
 function newTask () 
 {
     input = document.getElementById('input-new-task') // Pega o valor do input e armazena na variável input
@@ -32,16 +32,16 @@ function newTask ()
     else // Se a tarefa for válida, ela é adicionada à lista
     {
 
-        let dadosTarefa = {
+        let dadosTarefa = { // Cria um objeto com os dados da nova tarefa
             name: input.value
         };
 
-        fetch("http://localhost:3000/tarefas", {
-        method: "POST",
+        fetch("http://localhost:3000/tarefas", { // Envia uma requisição POST para o servidor para adicionar a nova tarefa
+        method: "POST", 
         headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json" 
         },
-        body: JSON.stringify(dadosTarefa)
+        body: JSON.stringify(dadosTarefa) 
         })
         
         // O código a seguir é responsável por adicionar a nova tarefa ao localStorage e atualizar a lista de tarefas exibida na tela

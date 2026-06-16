@@ -68,14 +68,23 @@ function showValues() // Exibe as tarefas armazenadas no localStorage na tela
     let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]"); // pega o valor do localStorage e armazena na variável values, se o localStorage estiver vazio, ele cria um array vazio
     let list = document.getElementById('to-do-list'); 
     list.innerHTML = ''
-    for (let i = 0; i < values.length; i++) // Loop para percorrer o array values e exibir cada tarefa na tela
+    for (let i = 0; i < values.length; i++) // Loop para percorrer o array values e exibir cada tarefa na tela, criando um elemento HTML para cada tarefa e adicionando um botão "ok" para remover a tarefa da lista
     {
         list.innerHTML += `<li>
             ${values[i]['name']}
-        <button id='btn-ok' onclick="removeItem('${values[i]['name']}')">ok</button>
-        </li>`
+        <button id='btn-ok' onclick="removeItem('${values[i]['name']}')">ok</button> <button id='btn-details' onclick="showDetails('${values[i]['name']}')">details</button>
+        </li> `
     }
 }
+
+function showDetails (data) // Exibe os detalhes da tarefa selecionada
+{
+    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]") // pega o valor do localStorage e armazena na variável values, se o localStorage estiver vazio, ele cria um array vazio
+    let tarefa = values.find(x => x.name == data) // Encontra a tarefa selecionada no array values
+    let detalhes = document.getElementById('detalhes') // Pega o elemento HTML onde os detalhes da tarefa serão exibidos
+    detalhes.innerHTML = `<p>${tarefa.name}</p><p>${tarefa.date}</p>` // Exibe o nome e a data da tarefa selecionada
+}   
+
 function removeItem (data) // Remove a tarefa do localStorage e atualiza a lista de tarefas exibida na tela
 {
     let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]") // pega o valor do localStorage e armazena na variável values, se o localStorage estiver vazio, ele cria um array vazio

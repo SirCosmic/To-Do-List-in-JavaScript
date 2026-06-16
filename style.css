@@ -71,3 +71,10 @@ body{
     font-size: 1.4rem;
     text-transform: capitalize;
 }
+
+
+#detalhes {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}

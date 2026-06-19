@@ -1,22 +1,20 @@
 const localStorageKey = "to-do-list"
-let input;
+const inputNewTask = document.getElementById('input-new-task'); // Pega o elemento HTML do input onde o usuário digita a nova tarefa
+const btnAddTask = document.getElementById('btn-add-task'); // Pega o elemento HTML do botão que adiciona a nova tarefa
+let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]"); // Pega o array de tarefas armazenado no localStorage, ou cria um array vazio caso não exista nenhum valor armazenado
+let input = inputNewTask; // Pega o valor do input e armazena na variável input
+let list = document.getElementById('to-do-list'); // Pega o elemento HTML da lista de tarefas onde as tarefas serão exibidas
 
-// Verifica se a tarefa já existe no localStorage, retornando true ou false
-function validateNewTask () 
+
+function validateNewTask () // Verifica se a tarefa já existe no localStorage, retornando true ou false
 {
-    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]")
-
-    let inputValue = document.getElementById('input-new-task').value
-
-    let exists  = values.find(x => x.name == inputValue)
-
+    let inputValue = inputNewTask.value;
+    let exists  = values.find(x => x.name == inputValue);
     return !exists ? false : true;
 }
 
-// Adiciona novas tarefas a lista de tarefas, verificando se o input é válido e se a tarefa já existe, e atualiza a lista de tarefas exibida na tela
-function newTask () 
+function newTask () // Adiciona novas tarefas a lista de tarefas, verificando se o input é válido e se a tarefa já existe, e atualiza a lista de tarefas exibida na tela
 {
-    input = document.getElementById('input-new-task') // Pega o valor do input e armazena na variável input
     input.style.border = ''
     const data = new Date(); // Cria um objeto Date para obter a data atual
     const opcoes = {
@@ -51,7 +49,6 @@ function newTask ()
         })
         
         // O código a seguir é responsável por adicionar a nova tarefa ao localStorage e atualizar a lista de tarefas exibida na tela
-        let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]") // pega o valor do localStorage e armazena na variável values, se o localStorage estiver vazio, ele cria um array vazio
         values.push({ // Adiciona a nova tarefa ao array values
             name: input.value,
             date: data.toLocaleString('pt-BR', opcoes)
@@ -63,10 +60,17 @@ function newTask ()
     input.value = ''
 }
 
+inputNewTask.addEventListener('keypress', function(event) // Adiciona um evento de teclado para o input, permitindo que o usuário adicione uma nova tarefa pressionando a tecla Enter
+{
+    if(event.keyCode === 13)
+    {
+        newTask();
+    }
+}
+)
+
 function showValues() // Exibe as tarefas armazenadas no localStorage na tela
 {
-    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]"); // pega o valor do localStorage e armazena na variável values, se o localStorage estiver vazio, ele cria um array vazio
-    let list = document.getElementById('to-do-list'); 
     list.innerHTML = ''
     for (let i = 0; i < values.length; i++) // Loop para percorrer o array values e exibir cada tarefa na tela, criando um elemento HTML para cada tarefa e adicionando um botão "ok" para remover a tarefa da lista
     {
@@ -79,7 +83,6 @@ function showValues() // Exibe as tarefas armazenadas no localStorage na tela
 
 function showDetails (data) // Exibe os detalhes da tarefa selecionada
 {
-    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]") // pega o valor do localStorage e armazena na variável values, se o localStorage estiver vazio, ele cria um array vazio
     let tarefa = values.find(x => x.name == data) // Encontra a tarefa selecionada no array values
     let detalhes = document.getElementById('detalhes') // Pega o elemento HTML onde os detalhes da tarefa serão exibidos
     detalhes.innerHTML = `<p>${tarefa.name}</p><p>${tarefa.date}</p>` // Exibe o nome e a data da tarefa selecionada
@@ -87,7 +90,6 @@ function showDetails (data) // Exibe os detalhes da tarefa selecionada
 
 function removeItem (data) // Remove a tarefa do localStorage e atualiza a lista de tarefas exibida na tela
 {
-    let values = JSON.parse(localStorage.getItem(localStorageKey) || "[]") // pega o valor do localStorage e armazena na variável values, se o localStorage estiver vazio, ele cria um array vazio
     let index = values.findIndex(x => x.name == data)
     values.splice(index,1)
     localStorage.setItem(localStorageKey,JSON.stringify(values))

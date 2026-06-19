@@ -56,7 +56,6 @@ function newTask () // Adiciona novas tarefas a lista de tarefas, verificando se
         localStorage.setItem(localStorageKey,JSON.stringify(values)) // Armazena o array values no localStorage, convertendo-o para uma string JSON
         showValues()
     }
-    console.log(input.value);
     input.value = ''
 }
 

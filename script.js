@@ -53,9 +53,14 @@ function newTask () // Adiciona novas tarefas a lista de tarefas, verificando se
             name: input.value,
             date: data.toLocaleString('pt-BR', opcoes)
         });
-        localStorage.setItem(localStorageKey,JSON.stringify(values)) // Armazena o array values no localStorage, convertendo-o para uma string JSON
-        showValues()
+        localStorage.setItem(localStorageKey,JSON.stringify(values)); // Armazena o array values no localStorage, convertendo-o para uma string JSON
+        showValues();
     }
+    clearInput();
+}
+
+function clearInput () // Limpa o valor do input após adicionar uma nova tarefa
+{
     input.value = ''
 }
 
@@ -73,9 +78,11 @@ function showValues() // Exibe as tarefas armazenadas no localStorage na tela
     list.innerHTML = ''
     for (let i = 0; i < values.length; i++) // Loop para percorrer o array values e exibir cada tarefa na tela, criando um elemento HTML para cada tarefa e adicionando um botão "ok" para remover a tarefa da lista
     {
-        list.innerHTML += `<li>
+        list.innerHTML += 
+        `<li>
             ${values[i]['name']}
-        <button id='btn-ok' onclick="removeItem('${values[i]['name']}')">ok</button> <button id='btn-details' onclick="showDetails('${values[i]['name']}')">details</button>
+            <button id='btn-ok' onclick="removeItem('${values[i]['name']}')">Concluir</button>
+            <button id='btn-details' onclick="showDetails('${values[i]['name']}')">Detalhes</button>
         </li> `
     }
 }

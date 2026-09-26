@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 
 app.get('/tarefas', async (req, res) => {
   const tasks = await UserTask.find();
-  res.json(tasks);
+  return res.status(200).json(tasks);
 });
 
 
@@ -23,7 +23,7 @@ app.post('/tarefas/enviar', async (req, res) => {
 
   const newtask = await UserTask.create(tasks);
 
-  return res.json(newtask);
+  return res.status(201).json(newtask);
 })
 
 

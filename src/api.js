@@ -1,7 +1,8 @@
 import express from "express";
-import mongoose from "mongoose";
 
 import UserTask from "./models/User.js";
+
+import connectToDatabase from "./database/db.js";
 
 const app = express();
 app.use(express.json());
@@ -28,8 +29,7 @@ app.post('/tarefas/enviar', async (req, res) => {
 
 
 
-
-mongoose.connect("mongodb://guilhermetrajanog27_db_user:2mEJ0cnFBHoazIfe@ac-oqb8xju-shard-00-00.wf4yacf.mongodb.net:27017,ac-oqb8xju-shard-00-01.wf4yacf.mongodb.net:27017,ac-oqb8xju-shard-00-02.wf4yacf.mongodb.net:27017/?ssl=true&replicaSet=atlas-1268lx-shard-0&authSource=admin&appName=Cluster0")
+connectToDatabase()
 .then(() => {
     console.log("Connected to MongoDB :)");
   }

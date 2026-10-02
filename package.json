@@ -2,10 +2,10 @@
   "name": "to-do-list-in-javascript",
   "version": "1.0.0",
   "description": "To Do list with HTML CSS and JavaScript",
-  "main": "api.js",
+  "main": "src/api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon api.js"
+    "dev": "nodemon src/api.js"
   },
   "repository": {
     "type": "git",

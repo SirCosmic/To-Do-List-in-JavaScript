@@ -14,4 +14,12 @@ async function createTasks(req, res) {
     return res.status(201).json(newtask);
 };
 
-export { getTasks, createTasks };
+async function deleteTasks(req, res) {
+    const id = req.params.id;
+
+    await UserTask.findByIdAndDelete({ _id: id });
+
+    return res.status(200).json({ message: "Task deleted successfully" });
+}
+
+export { getTasks, createTasks, deleteTasks };
